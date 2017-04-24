@@ -1,0 +1,171 @@
+@media (max-width: @screen-xs) {
+    body {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: @screen-sm) {
+    body {
+        font-size: 14px;
+    }
+}
+
+.nav.navbar-nav.navbar-right li a {
+    height: 40px;
+    color: #A9A9A9;
+    font-family: Myriad Pro;
+    font-size: 1.2em;
+    margin: 4px;
+}
+
+ul.nav a:hover {
+    color: #BD2133 !important;
+    background-color: white !important;
+}
+
+.navbar {
+    height: 62px;
+    padding: 0px !important;
+    background-color: white;
+    margin: 0px;
+}
+
+#intro {
+    padding: 30px;
+    height: 600px;
+    margin: 0px;
+}
+
+.jumbotron>h1 {
+    text-align: center;
+    font-family: Futura;
+    color: #A9A9A9;
+}
+
+.jumbotron>h3 {
+    text-align: center;
+    font-family: Futura;
+    color: #BD2133;
+    text-underline-position: below;
+}
+
+.jumbotron>p {
+    text-align: center;
+    font-family: Myriad Pro;
+    color: #A9A9A9;
+    font-size: 1.3em;
+    text-underline-position: below;
+    padding: 15px;
+}
+
+#firstSection {
+    position: relative;
+    background-color: black;
+    margin-top: 62px;
+    padding: 0px;
+    height: auto;
+    max-width: 100%
+}
+
+#getStarted {
+    height: 100px;
+    width: 280px;
+    line-height: 90px;
+    box-sizing: border-box;
+    font-family: Futura;
+    font-size: 3em;
+    margin: 0px;
+}
+
+.btn-primary {
+    background-color: #2996CC;
+    outline-color: #2996CC;
+}
+
+.startText {
+    font-size: 2.3em;
+    line-height: 100px;
+    font-family: Futura;
+    color: #A9A9A9;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: center;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+#loginContainer {
+    background-color: white;
+    position: relative;
+    height: 400px;
+    width: 500px;
+    margin-top: -5%;
+    padding: 0px;
+    align-content: center;
+    align-items: center;
+}
+
+#loginLogo {
+    display: block;
+    width: 75px;
+    height: 70px;
+    margin: auto;
+}
+
+.imgcontainer {
+    height: 75px;
+    width: 80px;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    bottom: 35%;
+    left: 42%;
+}
+
+#logininput {
+    width: 450px;
+    height: 250px;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 5%;
+}
+
+.navbar-toggle {
+    background-color: white;
+    /*border-color: #A9A9A9;*/
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    margin-left: -60px;
+    margin-top: 10px;
+}
+
+.navbar-toggle>.icon-bar {
+    background-color: #A9A9A9;
+    margin-left: 4px;
+}
+
+.collapse.in>navbar>li {
+    background-color: white;
+}
+
+.textbox {
+    width: 300px;
+    height: 40px;
+    position: absolute;
+}
+
+#submitButton {
+    margin-top: 60px;
+    width: 300px;
+    height: 40px;
+}
+
+#checkbox {
+    appearance: none;
+}
