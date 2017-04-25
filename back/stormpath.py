@@ -1,5 +1,8 @@
+#!/usr/bin/env
 from flask import Flask, render_template, request, jsonify, abort, make_response
+
 from os.path import expanduser
+
 from flask_stormpath import StormpathManager
 
 app = Flask(__name__)
@@ -26,28 +29,6 @@ app.config['STORMPATH_LOGIN_TEMPLATE'] = 'login.html'
 '''
 
 stormpath_manager = StormpathManager(app)
-
-entries = [
-    {
-        'id': 1,
-        'title':u"Today's Date and time",
-        'string':'This is the entry itself'
-    }
-]
-
-@app.route('/')
-def home():
-    return 'home page!'
-
-@app.route('/secret')
-def secret():
-    return 'secret page!'
-
-
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
 
 
     
