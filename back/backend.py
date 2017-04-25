@@ -13,6 +13,7 @@ app = Flask(__name__)
     
 app.config['SECRET_KEY'] = 'StanleyIsAwesome'
 app.config['STORMPATH_API_KEY_FILE'] = expanduser('~/.stormpath/apiKey.properties')
+
 app.config['STORMPATH_APPLICATION'] = 'Jot'
     
 app.config['STORMPATH_ENABLE_GIVEN_NAME'] = False
