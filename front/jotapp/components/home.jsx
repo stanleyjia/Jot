@@ -8,6 +8,7 @@ class Home extends React.Component{
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossOrigin="anonymous" />
         <link rel="stylesheet" type="text/css" href="../static/mystyle.css" />
+            
         <header>
           <nav className="navbar navbar navbar-fixed-top" role="navigation">
             <div className="container-fluid">
@@ -17,13 +18,14 @@ class Home extends React.Component{
                   <span className="icon-bar" />
                   <span className="icon-bar" />
                 </button>
-                <a className="navbar-brand" style={{height: 60, width: 'auto', padding: 0, margin: 0}} href="http://127.0.0.1:5000/home"><img style={{width: 70, height: 60}} src="../static/logo.png" /></a>
+                <a className="navbar-brand" style={{height: 60, width: 'auto', padding: 0, margin: 0}} href="/"><img style={{width: 70, height: 60}} src="../static/logo.png" /></a>
                 <img className="navbar-brand" style={{margin: 0, position: 'fixed', width: 150, height: 15, padding: 0, marginTop: 30, marginLeft: 10}} src="../static/5MinuteJournalText.png" />
               </div>
               <div className="collapse navbar-collapse" id="navbar">
                 <ul className="nav navbar-nav navbar-right">
-                  <li><a href="http://127.0.0.1:5000/home">home</a></li>
-                  <li><a href="http://127.0.0.1:5000/signin">sign in</a></li>
+                  <li><a href="/">home</a></li>
+                  <li><a href="/login">login</a></li>
+                    <li><a href="/register">register</a></li>
                   <li><a href>help</a></li>
                   <li><a href>about</a></li>
                   <li><a href>contact</a></li>
@@ -39,7 +41,7 @@ class Home extends React.Component{
           <div className="row vertical-center" style={{backgroundColor: 'white', height: 220, marginTop: '-30px'}}>
             <div className="col-sm-4 startText">Start today for free!</div>
             <div className="col-sm-4" style={{textAlign: 'center'}}>
-              <a href="http://127.0.0.1:5000/jotapp" className="btn btn-primary btn-xlr" role="button" id="getStarted">Start Writing!</a></div>
+              <a href="/app" className="btn btn-primary btn-xlr" role="button" id="getStarted">Start Writing!</a></div>
             <div className="col-sm-4 startText">All it takes is 5 minutes!</div>
           </div>
         </div>

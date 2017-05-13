@@ -10,6 +10,24 @@ var loginLogo = {
     width: 75,
     height: 70
 }
+
+//get cookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 //gets different between two strings
 function getDifference(a, b) {
     var i = 0;
@@ -76,17 +94,33 @@ class Journal extends React.Component {
             failed: false,
             timerCleared: true,
             timeCounterInterval: 0.2,
-            entryTime: entryTimeMin * 60
+            entryTime: entryTimeMin * 30,
+            newID : 0,
+            user: '',
+            pass: ''
 
         }
         this.startTyping = this.startTyping.bind(this);
         this.countDown = this.countDown.bind(this)
         this.countUp = this.countUp.bind(this)
+        this.entryDone = this.entryDone.bind(this);
 
     }
 
     componentWillMount() {
         this.state.inputValue = ""
+        //get cookies
+        var cuser = getCookie('user')
+        var cpass = getCookie('pass')
+        console.log('cookies: '+cuser+ ' : ' + cpass) 
+
+        /*if (getCookie('user')=='') {
+            this.setState({user:this.props.userInfo.user, pass: this.props.userInfo.pass})
+        } else {
+            this.setState({user:getCookie('user'), pass: getCookie('pass')})
+        }*/
+        this.setState({user:cuser, pass: cpass})
+    
     }
     //Gradient color as countdown
     changeColor(e) {
@@ -137,14 +171,67 @@ class Journal extends React.Component {
         this.state.readOnly = true
         this.state.failed = true
     }
+    
     entryDone() {
         console.log('entry done')
+        //need to change textarea to readonly
+        this.state.readOnly = true
         //remove all newlines
         this.state.inputValue = this.state.inputValue.replace(/(\r\n|\n|\r)/gm, " ");
-        alert(this.state.inputValue) //need to change textarea to readonly
-        this.state.readOnly = true
+        
+        
+        //get id for new entry
+        fetch('http://127.0.0.1:5000/api/getID', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization' : "Basic " +btoa(this.state.user + ":" + this.state.pass)
+                
+            }
+        })
+        .then(response => response.json())
+        .then(response => {
+                console.log(response)
+                /*if successful entry, nothing*/
+                if (response.status == 205){
+                   return
+                } else {
+                    console.log('ID failure')
+                }
+            
+            this.state.newID = response.id
+            console.log(response.id)
+            })
+        
+        
+            
+        fetch('http://127.0.0.1:5000/api/makeEntry', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user: this.state.user,
+                pass: this.state.pass,
+                id: this.state.newID,
+                entry: this.state.inputValue
+            })
+        })
+        .then(response => response.json())
+        .then(response => {
+                console.log(response)
+                /*if successful entry, redirect*/
+                if (response.status == 202){
+                    browserHistory.push('/log');
+                }
+            
+         
+            })
 
     }
+    
     resetClock() {
         clearInterval(this.state.myTimer);
         this.state.timerCleared = true

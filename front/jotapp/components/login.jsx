@@ -1,11 +1,35 @@
 var React = require('react')
 var browserHistory = require('react-router').browserHistory
+var cookie = require('react-cookie');
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentWillMount() {
+        //check cookies
+        var username = getCookie("user");
+        if (username != "") {
+            alert("Welcome again " + username);
+            browserHistory.push('/app');
+        } 
     }
     handleSubmit(e) {
         e.preventDefault();
@@ -21,7 +45,7 @@ class Login extends React.Component {
             pass: formData['password']
         }
         //handoff to parent
-        this.props.onLoginInfo(JSON.stringify(data))
+        this.props.onLoginInfo(data)
         
      fetch('http://127.0.0.1:5000/api/login', {
             method: 'POST',
@@ -39,7 +63,7 @@ class Login extends React.Component {
                 console.log(response)
                 /*if successful login, redirect*/
                 if (response.status == 202){
-                    browserHistory.push('/log');
+                    browserHistory.push('/app');
                 }
             
          
@@ -76,7 +100,7 @@ class Login extends React.Component {
                     margin: 0
                 }
             }
-            href = "http://127.0.0.1:5000/home " > < img style = {
+            href = "/ " > < img style = {
                 {
                     width: 70,
                     height: 60
@@ -103,9 +127,9 @@ class Login extends React.Component {
             <
             ul className = "nav navbar-nav navbar-right" >
             <
-            li > < a href = "http://127.0.0.1:5000/home " > home < /a></li >
+            li > < a href = "/" > home < /a></li >
             <
-            li > < a href = "http://127.0.0.1:5000/signin" > sign in < /a></li > < li > < a href > help < /a></li > < li > < a href > about < /a></li > < li > < a href > contact < /a></li > < /ul> < /
+            li > < a href = "login" > login < /a></li > < li > < a href > help < /a></li > < li > < a href > about < /a></li > < li > < a href > contact < /a></li > < /ul> < /
             div > < /div> < /
             nav > < /header> <
             div className = "jumbotron vertical-center"

@@ -78,7 +78,7 @@ class Register extends React.Component {
                     margin: 0
                 }
             }
-            href = "http://127.0.0.1:5000/home " > < img style = {
+            href = "/ " > < img style = {
                 {
                     width: 70,
                     height: 60
@@ -105,9 +105,11 @@ class Register extends React.Component {
             <
             ul className = "nav navbar-nav navbar-right" >
             <
-            li > < a href = "http://127.0.0.1:5000/home " > home < /a></li >
+            li > < a href = "/ " > home < /a></li >
             <
-            li > < a href = "http://127.0.0.1:5000/signin" > sign in < /a></li > < li > < a href > help < /a></li > < li > < a href > about < /a></li > < li > < a href > contact < /a></li > < /ul> < /
+            li > < a href = "/login" > sign in < /a></li >
+                <li><a href="/register">register</a></li>
+                < li > < a href > help < /a></li > < li > < a href > about < /a></li > < li > < a href > contact < /a></li > < /ul> < /
             div > < /div> < /
             nav > < /header> <
             div className = "jumbotron vertical-center"

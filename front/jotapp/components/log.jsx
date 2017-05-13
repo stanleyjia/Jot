@@ -1,14 +1,18 @@
 var React = require('react')
+var browserHistory = require('react-router').browserHistory
 var loginLogo = {
     width: 75,
     height: 70
 }
 class Log extends React.Component {
-    getCollection () {
-        console.log(this.props.userInfo)
+    componentWillMount () {
+        console.log('userinfo: ' + this.props.userInfo.user + ' : ' + this.props.userInfo.pass)
+        /*no user info*/
+        if (this.props.userInfo.user === "" || this.props.userInfo.pass === "") {
+            browserHistory.push('/login');
+        }
     }
     render () {
-        console.log(this.props.userInfo)    
         return(
             <div style = {
                 {
