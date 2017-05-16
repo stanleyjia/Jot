@@ -2,6 +2,12 @@ var React = require('react')
 var browserHistory = require('react-router').browserHistory
 var cookie = require('react-cookie');
 
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -25,11 +31,11 @@ class Login extends React.Component {
     }
     componentWillMount() {
         //check cookies
-        var username = getCookie("user");
+       /* var username = getCookie("user");
         if (username != "") {
             alert("Welcome again " + username);
             browserHistory.push('/app');
-        } 
+        } */
     }
     handleSubmit(e) {
         e.preventDefault();
@@ -46,6 +52,10 @@ class Login extends React.Component {
         }
         //handoff to parent
         this.props.onLoginInfo(data)
+        
+        //set cookies
+        setCookie('user', data.user, 2)
+        setCookie('pass', data.pass, 2)
         
      fetch('http://127.0.0.1:5000/api/login', {
             method: 'POST',

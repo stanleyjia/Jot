@@ -94,8 +94,8 @@ class Journal extends React.Component {
             failed: false,
             timerCleared: true,
             timeCounterInterval: 0.2,
+            //entry time: sec multiplied by ten
             entryTime: entryTimeMin * 30,
-            newID : 0,
             user: '',
             pass: ''
 
@@ -173,6 +173,7 @@ class Journal extends React.Component {
     }
     
     entryDone() {
+        var newID = 1
         console.log('entry done')
         //need to change textarea to readonly
         this.state.readOnly = true
@@ -190,7 +191,6 @@ class Journal extends React.Component {
                 
             }
         })
-        .then(response => response.json())
         .then(response => {
                 console.log(response)
                 /*if successful entry, nothing*/
@@ -200,7 +200,7 @@ class Journal extends React.Component {
                     console.log('ID failure')
                 }
             
-            this.state.newID = response.id
+            newID = response.id
             console.log(response.id)
             })
         
@@ -215,7 +215,7 @@ class Journal extends React.Component {
             body: JSON.stringify({
                 user: this.state.user,
                 pass: this.state.pass,
-                id: this.state.newID,
+                id: newID,
                 entry: this.state.inputValue
             })
         })
