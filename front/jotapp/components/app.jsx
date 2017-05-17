@@ -194,11 +194,7 @@ class Journal extends React.Component {
         .then(response => response.json())
        .then(jsonData => {
             console.log(jsonData.id)
-        })
-        
-        
-            
-        fetch('http://127.0.0.1:5000/api/makeEntry', {
+            fetch('http://127.0.0.1:5000/api/makeEntry', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -207,7 +203,7 @@ class Journal extends React.Component {
             body: JSON.stringify({
                 user: this.state.user,
                 pass: this.state.pass,
-                id: newID,
+                id: jsonData.id,
                 entry: this.state.inputValue
             })
         })
@@ -221,6 +217,10 @@ class Journal extends React.Component {
             
          
             })
+        })
+        
+        
+            
 
     }
 

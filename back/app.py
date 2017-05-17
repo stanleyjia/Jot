@@ -176,7 +176,7 @@ def getid():
             try:
                #there is already a post/id
                 largestID = myentries.get('id')
-                newID = int(largestID) + 1
+                newID = str(int(largestID) + 1)
                 print (newID, file=sys.stderr)
                 message = {
                 'status': 205,
@@ -190,9 +190,12 @@ def getid():
             
             except (AttributeError, TypeError): 
                 #no previous id
-                message = {'status': 205, 'message': 'Successful new ID', 'id': 1}
+                message = {
+                'status': 205,
+                'message': 'Successful new ID',
+                    'id': '1'
+                }
                 resp = jsonify(message)
-                resp.status_code = 205
                 return resp
             
     
