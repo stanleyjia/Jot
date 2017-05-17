@@ -159,7 +159,7 @@ def getid():
 
     username = decoded[0]
     password = decoded[1]
-    print (username + ' : '+ password, file=sys.stderr)
+
     mongourl='mongodb://'+'stanleyjia101'+':'+'001229'+'@ds133450.mlab.com:33450/jotapp'
     client = MongoClient(mongourl)
     mydb = client['jotapp']
@@ -184,16 +184,18 @@ def getid():
                     'id': newID
                 }
                 resp = jsonify(message)
-                resp.status_code = 205
                 return resp
+                #return jsonify({'id': newID})
+                
             
-            except AttributeError: 
+            except (AttributeError, TypeError): 
                 #no previous id
-                print (1, file=sys.stderr)
                 message = {'status': 205, 'message': 'Successful new ID', 'id': 1}
                 resp = jsonify(message)
                 resp.status_code = 205
                 return resp
+            
+    
         
         else:
             #password doesn't match

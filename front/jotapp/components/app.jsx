@@ -78,7 +78,6 @@ class Journal extends React.Component {
         var lineProgress;
         var backgroundColor = '#FFFEFA';
         var lastCharArray = [];
-        var entryTimeMin = 0.1;
         this.state = {
             wordCountNum: 0,
             wordLabel: 'words',
@@ -94,10 +93,11 @@ class Journal extends React.Component {
             failed: false,
             timerCleared: true,
             timeCounterInterval: 0.2,
-            //entry time: sec multiplied by ten
-            entryTime: entryTimeMin * 30,
+            //entry time: sec 
+            entryTime: 1,
             user: '',
-            pass: ''
+            pass: '',
+            idGotten: false
 
         }
         this.startTyping = this.startTyping.bind(this);
@@ -172,7 +172,7 @@ class Journal extends React.Component {
         this.state.failed = true
     }
     
-    entryDone() {
+   entryDone() {
         var newID = 1
         console.log('entry done')
         //need to change textarea to readonly
@@ -191,18 +191,10 @@ class Journal extends React.Component {
                 
             }
         })
-        .then(response => {
-                console.log(response)
-                /*if successful entry, nothing*/
-                if (response.status == 205){
-                   return
-                } else {
-                    console.log('ID failure')
-                }
-            
-            newID = response.id
-            console.log(response.id)
-            })
+        .then(response => response.json())
+       .then(jsonData => {
+            console.log(jsonData.id)
+        })
         
         
             
@@ -231,6 +223,8 @@ class Journal extends React.Component {
             })
 
     }
+
+    
     
     resetClock() {
         clearInterval(this.state.myTimer);
@@ -329,7 +323,6 @@ class Journal extends React.Component {
     }
 
     render() {
-
         //Time counter went down, you failed!
         if ((this.state.timeCounter < 0) && (this.state.failed == false)) {
             this.failJournal();
